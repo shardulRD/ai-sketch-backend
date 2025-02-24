@@ -16,9 +16,13 @@ def convert_to_sketch(image):
     sketch = cv2.divide(gray, inverted_blur, scale=256.0)
     return sketch
 
+@app.route("/")
+def home():
+    return "Hello, your AI Sketch Generator backend is live! 🎨"
+
 @app.route("/sketch", methods=["POST"])
 def sketch():
-    file = request.files["image"]
+    file = request.files.get("image")
     if not file:
         return jsonify({"error": "No image uploaded"}), 400
 
