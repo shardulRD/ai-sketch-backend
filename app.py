@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import cv2
 import numpy as np
 import base64
+import os
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -29,4 +30,5 @@ def sketch():
     return jsonify({"sketch": sketch_base64})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Default to 5000 if PORT is not set
+    app.run(host="0.0.0.0", port=port, debug=True)
